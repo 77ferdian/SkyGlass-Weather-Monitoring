@@ -1,104 +1,167 @@
-# 🌤️ SkyGlass - Weather Dashboard
+# SkyGlass Weather Monitoring
 
-SkyGlass is a premium, state-of-the-art weather forecasting dashboard built with a gorgeous modern Glassmorphism theme ("Atmospheric Glass"). It features highly detailed real-time weather metrics, debounced search recommendations, horizontal hourly forecasts, and localized MSN-style health and life widgets (Air Quality Index, UV Index, and Sun Cycle).
+<div align="center">
 
----
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.x-000000?style=for-the-badge&logo=express&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![OpenMeteo](https://img.shields.io/badge/OpenMeteo-API-FF6B35?style=for-the-badge&logo=openstreetmap&logoColor=white)
 
-## 📋 Daftar Isi
+</div>
 
-1. [Fitur Utama](#-fitur-utama)
-2. [Arsitektur & Teknologi](#-arsitektur--teknologi)
-3. [Prasyarat](#-prasyarat)
-4. [Instalasi & Penggunaan](#-instalasi--penggunaan)
-5. [Struktur Proyek](#-struktur-proyek)
-6. [API Endpoints](#-api-endpoints)
+SkyGlass is a modern weather dashboard designed to deliver real-time weather insights through a polished glassmorphism interface. The application combines location search, forecast data, air quality readings, and personalized user preferences into a single, user-friendly experience.
 
----
+## Overview
 
-## ✨ Fitur Utama
+SkyGlass provides weather information for selected locations with a premium interface and responsive layout. It enables users to:
 
-- **🔍 Debounced Search Autocomplete:** Suggestions appear as you type with flag icons and population-based prioritization (e.g. Jakarta shows up first for "jak").
-- **🌡️ Unit Temperature Switcher:** Fast toggling between Celsius (°C) and Fahrenheit (°F) with animated transition and full forecast update.
-- **🕒 Hourly Forecast Strip:** A horizontal, snap-scrolling strip containing weather conditions, temperature, and precipitation chance for the next 24 hours.
-- **🍃 Air Quality (AQI) Widget:** Tracks US Air Quality Index (AQI), status rating (Good, Moderate, Unhealthy, Hazardous), and PM2.5/PM10 levels.
-- **☀️ UV Index Gauge:** Highlights the daily maximum UV level with visual progress tracking.
-- **🌅 Sun Cycle & Visibility:** Visualizes local sunrise/sunset times and current visibility values.
-- **💾 Recent Search Persistence:** Automatic logging of recent searches backed by SQLite for fast recall.
+- Search for cities using autocomplete suggestions
+- View current weather conditions and hourly forecasts
+- Switch between Celsius and Fahrenheit units
+- Check air quality and UV index information
+- Save recent searches and user preferences locally
+- Experience a visually rich dashboard built around a glass-inspired design system
 
----
+## Tech Stack
 
-## 🛠️ Arsitektur & Teknologi
+- Frontend: Vanilla JavaScript, HTML5, CSS3
+- Styling: Custom CSS, Glassmorphism design system
+- Backend: Node.js, Express
+- Database: SQLite with better-sqlite3
+- APIs: Open-Meteo Geocoding, Weather, and Air Quality APIs
+- Runtime: Node.js 18+
+- Package Manager: npm
 
-- **Frontend:** Vanilla JS, Tailwind CSS, Google Material Symbols, Custom Glassmorphism styling.
-- **Backend:** Node.js, Express, CORS.
-- **Database:** SQLite via `better-sqlite3` for local state/preference persistence.
-- **APIs:** Open-Meteo Weather API, Open-Meteo Air Quality API, Open-Meteo Geocoding API.
+## Features
 
----
+- City search with autocomplete and location ranking
+- Current weather display with temperature, humidity, and wind metrics
+- Hourly forecast strip for short-term weather tracking
+- Temperature unit switching between C and F
+- AQI and air-quality monitoring
+- UV index and visibility indicators
+- Recent search persistence using local SQLite storage
+- Responsive dashboard layout for desktop and mobile browsing
 
-## 🔧 Prasyarat
+## Architecture
 
-Sebelum memulai, pastikan Anda telah menginstal:
-- **Node.js** (versi 18+)
-- **npm**
+The application follows a simple layered architecture:
 
----
+- Frontend assets are served from the public directory
+- Express routes handle incoming HTTP requests
+- Service modules manage business logic and external API calls
+- SQLite stores user preferences and recent search history
 
-## 📦 Instalasi & Penggunaan
+## Project Structure
 
-### 1. Clone atau Buka Proyek
-Navigasi ke direktori proyek:
-```bash
-cd "d:\Coding Folder\SkyGlass"
+```text
+SkyGlass-Weather-Monitoring/
+├── public/
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       ├── app.js
+│       └── particles.js
+├── server/
+│   ├── index.js
+│   ├── database.js
+│   ├── controllers/
+│   ├── routes/
+│   │   ├── city.routes.js
+│   │   ├── geocode.routes.js
+│   │   ├── preference.routes.js
+│   │   ├── search.routes.js
+│   │   └── weather.routes.js
+│   ├── services/
+│   │   ├── city.service.js
+│   │   ├── geocode.service.js
+│   │   ├── preference.service.js
+│   │   ├── search.service.js
+│   │   └── weather.service.js
+│   └── utils/
+├── .gitignore
+├── DESIGN.md
+├── package.json
+├── package-lock.json
+├── README.md
+└── LICENSE
 ```
 
-### 2. Instal Dependency
-Jalankan perintah berikut untuk menginstal package yang diperlukan:
+## Prerequisites
+
+Make sure the following are installed on your machine:
+
+- Node.js 18 or later
+- npm
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/77ferdian/SkyGlass-Weather-Monitoring.git
+cd SkyGlass-Weather-Monitoring
+```
+
+2. Install dependencies:
+
 ```bash
 npm install
 ```
 
-### 3. Menjalankan Server
+## Running the Application
+
+Start the server:
+
 ```bash
 npm start
 ```
-Server akan berjalan di: **`http://localhost:3000`**
 
----
-
-## 📁 Struktur Proyek
+The application will run on:
 
 ```text
-SkyGlass/
-├── public/                 # Frontend Static Assets
-│   ├── index.html         # Main dashboard layout
-│   ├── css/
-│   │   └── style.css      # Custom glassmorphism styles
-│   └── js/
-│       ├── app.js         # Core frontend JS & DOM bindings
-│       └── particles.js   # Background floating particle effect
-├── server/                # Express Backend
-│   ├── index.js           # App entrypoint
-│   ├── database.js        # SQLite setup & connection
-│   ├── controllers/       # Controller handlers
-│   ├── routes/            # Route declarations
-│   ├── services/          # Business logic and external API integrations
-│   └── utils/             # Helper functions
-└── data/                  # SQLite database directory
+http://localhost:3000
 ```
 
----
+## API Endpoints
 
-## 🌐 API Endpoints
+| Endpoint | Method | Description |
+| --- | --- | --- |
+| `/api/weather` | GET | Fetch weather data based on latitude and longitude |
+| `/api/weather/:location` | GET | Fetch weather data by city name |
+| `/api/geocode` | GET | Get city recommendations based on user input |
+| `/api/cities` | GET, POST, DELETE | Manage saved city records |
+| `/api/searches` | GET, POST | Retrieve and store recent search entries |
+| `/api/preferences` | GET, POST | Manage user preferences such as temperature unit |
 
-| Endpoint | Method | Deskripsi |
-|----------|--------|-----------|
-| `/api/weather` | GET | Ambil cuaca berdasarkan latitude & longitude (`?lat={lat}&lon={lon}`) |
-| `/api/weather/:location` | GET | Ambil cuaca berdasarkan nama kota |
-| `/api/geocode` | GET | Dapatkan rekomendasi kota berdasarkan input pencarian (`?q={query}`) |
-| `/api/cities` | GET/POST/DELETE | Kelola daftar kota tersimpan |
-| `/api/searches` | GET/POST | Dapatkan atau simpan riwayat pencarian terbaru |
-| `/api/preferences` | GET/POST | Kelola pengaturan preferensi unit (°C / °F) |
+## Example Requests
 
----
-Happy Coding! 🎉
+Weather by coordinates:
+
+```bash
+curl "http://localhost:3000/api/weather?lat=-6.2088&lon=106.8456"
+```
+
+Geocoding search:
+
+```bash
+curl "http://localhost:3000/api/geocode?q=jakarta"
+```
+
+## Notes
+
+This project uses the Open-Meteo API for weather and geocoding data, which provides reliable and lightweight access to forecast and location information without needing a custom backend infrastructure for everything.
+
+## License
+
+This project is licensed under the ISC License.
+
+## Author
+
+77ferdian
+
+## Contributing
+
+Contributions are welcome. If you would like to improve the user interface, add new weather widgets, or optimize the API layer, please open an issue or submit a pull request.
